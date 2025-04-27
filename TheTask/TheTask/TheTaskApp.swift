@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TheTaskApp: App {
+    
+    @StateObject var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(appState)
         }
     }
 }
