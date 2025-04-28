@@ -45,8 +45,8 @@ extension PrimaryFilledButton {
 }
 
 // MARK: - PrimaryFilledButton Text Color
-/// Returns the button Text color based on the current button state.
 extension PrimaryFilledButton {
+    /// Returns the button Text color based on the current button state.
     private var textColor: Color {
         switch state {
         case .normal:

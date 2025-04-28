@@ -28,4 +28,16 @@ extension Color {
     static let primaryButtonColorNormal = Color(hex: "F4E041")
     static let primaryButtonColorPressed = Color(hex: "FFC700")
     static let primaryButtonColorDisabled = Color(hex: "DEDEDE")
+   
+    static let secondaryButtonColorNormal = Color(hex: "00BDD3")
+    static let secondaryButtonColorPressed = Color(hex: "00BDD3")
+    static let secondaryButtonColorDisabled = Color(hex: "000000").opacity(0.48)
+    
+    
+    // Header Color
+    static let primaryHeaderColor = Color(hex: "F4E041")
+    static let primaryHeaderTextColor = Color(hex: "1D1B20")
+    
+    // TabBar Color
+    static let primaryTabBarBackgroundColor = Color(hex: "F8F8F8")
 }

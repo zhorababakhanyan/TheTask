@@ -16,7 +16,7 @@ struct RootView: View {
     var body: some View {
         if appState.isLunchScreenActive {
             if appState.isInternetAvailable {
-                HomeView()
+                TabView()
             } else {
                 NoConnectionView(appState: appState)
             }

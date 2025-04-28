@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     var body: some View {
-        Text("Home View")
+            ZStack {
+                Color.primaryBackgroundColor
+                    .ignoresSafeArea(.all)
+                VStack {
+                   Text("HomeView")
+                }
+            }
     }
 }
