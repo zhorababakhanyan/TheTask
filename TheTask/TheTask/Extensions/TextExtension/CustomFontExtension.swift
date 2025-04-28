@@ -11,10 +11,10 @@ import SwiftUI
 /// Enum representing different font types used in the app.
 enum FontType: String {
     /// Regular font style using 'NunitoSans-Regular' - Weight 400.
-    case regular = "NunitoSans-Regular"
+    case regular_400 = "NunitoSans-Regular"
     
     /// Semi-bold font style using 'NunitoSans-SemiBold' - Weight 600.
-    case semiBold = "NunitoSans-SemiBold"
+    case semiBold_600 = "NunitoSans-SemiBold"
 }
 
 // MARK: - Custom Font Extension

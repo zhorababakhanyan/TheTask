@@ -19,4 +19,13 @@ extension Color {
     
     // Text Color
     static let primaryTextColor = Color(hex: "000000").opacity(0.87)
+    
+    static let primaryButtonTextColorNormal = Color(hex: "000000").opacity(0.87)
+    static let primaryButtonTextColorPressed = Color(hex: "000000").opacity(0.87)
+    static let primaryButtonTextColorDisabled = Color(hex: "000000").opacity(0.48)
+
+    // Button Color
+    static let primaryButtonColorNormal = Color(hex: "F4E041")
+    static let primaryButtonColorPressed = Color(hex: "FFC700")
+    static let primaryButtonColorDisabled = Color(hex: "DEDEDE")
 }

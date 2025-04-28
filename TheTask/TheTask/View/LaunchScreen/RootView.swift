@@ -18,7 +18,7 @@ struct RootView: View {
             if appState.isInternetAvailable {
                 HomeView()
             } else {
-                NoConnectionView()
+                NoConnectionView(appState: appState)
             }
         } else {
             LaunchScreen(isActive: $appState.isLunchScreenActive)

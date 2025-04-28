@@ -14,8 +14,8 @@ class AppState: ObservableObject {
     @Published var isLunchScreenActive: Bool = false
     @Published var isInternetAvailable: Bool = true
     
-    private var networkMonitor = NetworkMonitor()
-    
+    private var networkMonitor = NetworkMonitor.shared
+
     init() {
         networkMonitor.$isConnected
             .assign(to: &$isInternetAvailable)
