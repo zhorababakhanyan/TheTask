@@ -19,6 +19,7 @@ extension Color {
     
     // Text Color
     static let primaryTextColor = Color(hex: "000000").opacity(0.87)
+    static let secondaryTextColor = Color(hex: "000000").opacity(0.60)
     
     static let primaryButtonTextColorNormal = Color(hex: "000000").opacity(0.87)
     static let primaryButtonTextColorPressed = Color(hex: "000000").opacity(0.87)

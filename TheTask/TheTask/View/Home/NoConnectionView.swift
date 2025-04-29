@@ -9,7 +9,6 @@ import SwiftUI
 import Network
 
 struct NoConnectionView: View {
-    
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel: NoConnectionViewModel
     

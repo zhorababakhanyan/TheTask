@@ -8,14 +8,62 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
-            ZStack {
-                Color.primaryBackgroundColor
-                    .ignoresSafeArea(.all)
-                VStack {
-                   Text("HomeView")
+        ZStack {
+            Color.primaryBackgroundColor
+                .ignoresSafeArea()
+            
+            VStack {
+                if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                if viewModel.isLoading {
+                    ProgressView("Loading Users...")
+                } else {
+                    self.getUsersListView()
                 }
             }
+        }
+        .onAppear {
+            Task {
+                await viewModel.getUsers()
+            }
+        }
+    }
+}
+
+// MARK: - Users List View
+extension HomeView {
+    /// This function returns a `List` view displaying the users fetched from the view model.
+    /// It checks if the last user in the list has appeared on screen and loads more users if needed.
+    /// A loading indicator is shown at the bottom of the list while new users are being fetched.
+    ///
+    /// - Returns: A `View` representing a list of users with a progress indicator at the bottom.
+    func getUsersListView() -> some View {
+        List {
+            ForEach(viewModel.users, id: \.id) { user in
+                UserCardView(user: user)
+                    .onAppear {
+                        Task {
+                            if user == viewModel.users.last {
+                                await viewModel.loadMoreUsers()
+                            }
+                        }
+                    }
+            }
+            if viewModel.isLoadingMore {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 }

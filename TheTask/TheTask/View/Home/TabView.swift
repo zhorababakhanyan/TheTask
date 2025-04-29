@@ -24,6 +24,7 @@ struct TabView: View {
                     }
                 }
                 CustomTabBarView(selectedTab: $viewModel.selectedTab, tabItems: viewModel.tabItems)
+                    .frame(height: 56)
             }
         }
     }

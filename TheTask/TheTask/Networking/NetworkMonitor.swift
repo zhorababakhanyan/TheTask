@@ -11,7 +11,6 @@ import Network
 // MARK: - NetworkMonitor
 /// This class uses the `Network` freamwork to monitor internet connectivity.
 class NetworkMonitor: ObservableObject {
-    
     static let shared = NetworkMonitor()
     private var monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "Monitor")
