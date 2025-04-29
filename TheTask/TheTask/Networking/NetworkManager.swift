@@ -28,7 +28,6 @@ final class NetworkManager {
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 throw ErrorCases.invalidResponse
             }
-            
             let decoder = JSONDecoder()
             return try decoder.decode(UsersResponse.self, from: data)
             
@@ -44,12 +43,13 @@ final class NetworkManager {
     /// - Returns: A `UsersResponse` object containing the list of users and pagination details.
     /// - Throws: If the network request fails, it throws an error which is caught and re-thrown for handling by the calling code.
     static func getInitialUsers() async throws -> UsersResponse {
-        let initialURL = "https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=10"
+        let initialURL = "https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6"
         
         do {
+            print("✅ [GET] API call to fetch users succeeded with status 200! ")
             return try await fetchUsers(from: initialURL)
         } catch {
-            print("Error fetching initial users: \(error.localizedDescription)")
+            print("❌ Error fetching initial users: \(error.localizedDescription)")
             throw error
         }
     }

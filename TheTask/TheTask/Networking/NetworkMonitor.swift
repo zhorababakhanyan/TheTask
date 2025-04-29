@@ -25,4 +25,12 @@ class NetworkMonitor: ObservableObject {
         }
         monitor.start(queue: queue)
     }
+    
+    func startMonitoring() {
+        monitor.start(queue: queue)
+    }
+    
+    func stopMonitoring() {
+        monitor.cancel()
+    }
 }

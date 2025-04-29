@@ -20,4 +20,14 @@ class AppState: ObservableObject {
         networkMonitor.$isConnected
             .assign(to: &$isInternetAvailable)
     }
+    
+    func appDidEnterBackground() {
+        networkMonitor.stopMonitoring()
+        print("🟡 App entered background – monitoring stopped")
+    }
+
+    func appWillEnterForeground() {
+        networkMonitor.startMonitoring()
+        print("🟢 App entered foreground – monitoring started")
+    }
 }
