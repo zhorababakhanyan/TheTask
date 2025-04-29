@@ -14,7 +14,7 @@ struct TabView: View {
         ZStack {
             Color.primaryBackgroundColor
                 .ignoresSafeArea(.all)
-            VStack {
+            VStack(spacing: 0){
                 HeaderView(stage: viewModel.requestStage)
                 Group {
                     switch viewModel.selectedTab {

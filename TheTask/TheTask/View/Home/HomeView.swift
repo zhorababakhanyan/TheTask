@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @State private var hasAppeared = false
     
     var body: some View {
         ZStack {
@@ -16,22 +17,23 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             VStack {
-                if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                }
-                
-                if viewModel.isLoading {
-                    ProgressView("Loading Users...")
-                } else {
-                    self.getUsersListView()
+                Group {
+                    if !hasAppeared || viewModel.isLoading {
+                        ProgressView("Loading Users...")
+                    } else if viewModel.users.isEmpty {
+                        StatusView(statusType: .noUsers)
+                    } else {
+                        self.getUsersListView()
+                    }
                 }
             }
         }
         .onAppear {
-            Task {
-                await viewModel.getUsers()
+            if !hasAppeared {
+                hasAppeared = true 
+                Task {
+                    await viewModel.getUsers()
+                }
             }
         }
     }
@@ -55,6 +57,7 @@ extension HomeView {
                             }
                         }
                     }
+                    .listSectionSeparator(.hidden, edges: .bottom)
             }
             if viewModel.isLoadingMore {
                 HStack {

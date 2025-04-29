@@ -42,8 +42,8 @@ final class NetworkManager {
     ///
     /// - Returns: A `UsersResponse` object containing the list of users and pagination details.
     /// - Throws: If the network request fails, it throws an error which is caught and re-thrown for handling by the calling code.
-    static func getInitialUsers() async throws -> UsersResponse {
-        let initialURL = "https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6"
+    static func getInitialUsers(page: Int = 1, count: Int = 6) async throws -> UsersResponse {
+        let initialURL = "https://frontend-test-assignment-api.abz.agency/api/v1/users?page=\(page)&count=\(count)"
         
         do {
             print("✅ [GET] API call to fetch users succeeded with status 200! ")

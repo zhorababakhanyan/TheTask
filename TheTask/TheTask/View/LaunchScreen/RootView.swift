@@ -14,14 +14,18 @@ struct RootView: View {
     @EnvironmentObject var appState: AppState
     
     var body: some View {
-        if appState.isLunchScreenActive {
-            if appState.isInternetAvailable {
-                TabView()
+        ZStack {
+            Color.primaryBackgroundColor
+                .ignoresSafeArea(.all)
+            if appState.isLunchScreenActive {
+                if appState.isInternetAvailable {
+                    TabView()
+                } else {
+                    NoConnectionView(appState: appState)
+                }
             } else {
-                NoConnectionView(appState: appState)
+                LaunchScreen(isActive: $appState.isLunchScreenActive)
             }
-        } else {
-            LaunchScreen(isActive: $appState.isLunchScreenActive)
         }
     }
 }

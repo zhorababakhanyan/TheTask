@@ -53,7 +53,6 @@ extension CustomTabBarView {
                 .renderingMode(.template)
                 .foregroundColor(selectedTab == index ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
             
-            
             Text(tabItems[index].title)
                 .customFont(.semiBold_600, size: 16,
                             color: selectedTab == index ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
