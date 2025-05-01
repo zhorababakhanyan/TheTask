@@ -38,9 +38,9 @@ extension UserCardView {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 }
-                .clipShape(Circle())
-                .frame(width: 50, height: 50)
-                .padding(.top, 4)
+                    .clipShape(Circle())
+                    .frame(width: 50, height: 50)
+                    .padding(.top, 4)
             )
         } else {
             return AnyView(
@@ -66,10 +66,10 @@ extension UserCardView {
             Text(user?.name ?? "User Name is Missing")
                 .customFont(.regular_400, size: 18, color: .primaryTextColor)
                 .multilineTextAlignment(.leading)
-
+            
             Text(user?.position ?? "User Position is Missing")
                 .customFont(.regular_400, size: 14, color: .secondaryTextColor)
-
+            
             Text(user?.email ?? "User Email is Missing")
                 .customFont(.regular_400, size: 14, color: .primaryTextColor)
                 .lineLimit(1)

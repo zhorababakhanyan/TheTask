@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomTabBarView: View {
-    @Binding var selectedTab: Int
+    @Binding var selectedTab: Tab
     let tabItems: [TabItem]
     
     var body: some View {
@@ -28,13 +28,13 @@ extension CustomTabBarView {
     /// - Returns: A `HStack` view displaying all tab buttons.
     func getTabBarView() -> some View {
         HStack(spacing: 0) {
-            ForEach(0..<tabItems.count, id: \.self) { index in
+            ForEach(tabItems, id: \.tab) { item in
                 Button(action: {
                     withAnimation {
-                        selectedTab = index
+                        self.selectedTab = item.tab
                     }
                 }) {
-                    self.getTabBarItemView(index: index)
+                    self.getTabBarItemView(item: item)
                 }
             }
         }
@@ -47,15 +47,15 @@ extension CustomTabBarView {
     ///
     /// - Parameter index: The index of the tab item to display.
     /// - Returns: A `HStack` containing an icon and a title for the tab.
-    func getTabBarItemView(index: Int) -> some View {
+    func getTabBarItemView(item: TabItem) -> some View {
         HStack {
-            Image(tabItems[index].icon)
+            Image(item.icon)
                 .renderingMode(.template)
-                .foregroundColor(selectedTab == index ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
+                .foregroundColor(selectedTab == item.tab ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
             
-            Text(tabItems[index].title)
+            Text(item.title)
                 .customFont(.semiBold_600, size: 16,
-                            color: selectedTab == index ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
+                            color: selectedTab == item.tab ? .secondaryButtonColorNormal : .secondaryButtonColorDisabled)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 10)

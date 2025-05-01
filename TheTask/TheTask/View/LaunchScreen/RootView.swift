@@ -12,6 +12,7 @@ import SwiftUI
 /// It conforms to `ObservableObject` to allow other views to observe and react to state changes.
 struct RootView: View {
     @EnvironmentObject var appState: AppState
+    @State private var selectedTab: Tab = .home
     
     var body: some View {
         ZStack {
@@ -19,7 +20,7 @@ struct RootView: View {
                 .ignoresSafeArea(.all)
             if appState.isLunchScreenActive {
                 if appState.isInternetAvailable {
-                    TabView()
+                    TabView(selectedTab: $selectedTab)
                 } else {
                     NoConnectionView(appState: appState)
                 }

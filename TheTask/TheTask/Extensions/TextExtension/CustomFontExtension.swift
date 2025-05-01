@@ -32,4 +32,21 @@ extension Text {
             .font(.custom(font.rawValue, size: size))
             .foregroundStyle(color)
     }
-}     
+}
+
+/// Extension for customizing the font and color of a TextField view.
+extension TextField {
+    /// Applies a custom font and color to the Text view.
+    ///
+    /// - Parameters:
+    ///   - font: The `FontType` to be applied to the text.
+    ///   - size: The size of the font.
+    ///   - color: The color to apply to the text.
+    /// - Returns: A modified `Text` view with the custom font and color.
+    func customFont(_ font: FontType, size: CGFloat, color: Color) -> some View {
+        self
+            .font(.custom(font.rawValue, size: size))
+            .foregroundColor(color)
+    }
+}
+

@@ -57,6 +57,7 @@ extension HomeView {
                             }
                         }
                     }
+                    .listRowBackground(Color.clear)
                     .listSectionSeparator(.hidden, edges: .bottom)
             }
             if viewModel.isLoadingMore {
@@ -67,6 +68,8 @@ extension HomeView {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.clear)
         .listStyle(.plain)
     }
 }

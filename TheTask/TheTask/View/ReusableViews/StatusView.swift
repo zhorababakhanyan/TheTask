@@ -11,15 +11,19 @@ struct StatusView: View {
     var statusType: StatusType
     
     var body: some View {
-        VStack (spacing: 24) {
+        VStack (alignment: .center,spacing: 24) {
             self.statusImage()
                 .resizable()
                 .scaledToFit()
                 .frame(width: 200, height: 200)
             self.statusText()
                 .customFont(.regular_400, size: 20, color: .primaryTextColor)
+                .multilineTextAlignment(.center)
         }
     }
+}
+#Preview {
+    StatusView(statusType: .emailAlreadyRegistered)
 }
 
 // MARK: - StatusView Content
@@ -54,17 +58,18 @@ extension StatusView {
     private func statusText(customStatusText: String? = nil) -> Text {
         if let customStatusText = customStatusText {
             return Text(customStatusText)
+    
         }
         
         switch self.statusType {
         case .noInternetConnection:
-           return Text("There is no internet connection")
+            return Text("There is no internet connection")
         case .noUsers:
-           return Text("There are no users yet ")
+            return Text("There are no users yet ")
         case .successfulRegistration:
-           return Text("User successfully registered")
+            return Text("User successfully registered")
         case .emailAlreadyRegistered:
-           return Text("That email is already registered")
+            return Text("That Email or Phone number is already registered")
         }
     }
 }

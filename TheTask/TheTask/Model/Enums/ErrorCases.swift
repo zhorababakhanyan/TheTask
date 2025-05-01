@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// Represents various error cases that can occur during network-related operations.
+///
+/// Conforms to `LocalizedError` to provide user-friendly error descriptions.
 enum ErrorCases: LocalizedError {
     case invalidURL
     case invalidResponse

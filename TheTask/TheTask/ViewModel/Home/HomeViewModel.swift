@@ -17,6 +17,7 @@ final class HomeViewModel: ObservableObject {
     private var nextURL: String? = nil
 }
 
+// MARK: - Networking
 // MARK: - GetUsers
 /// Fetches the initial set of users from the network.
 extension HomeViewModel {

@@ -30,10 +30,16 @@ extension Color {
     static let primaryButtonColorPressed = Color(hex: "FFC700")
     static let primaryButtonColorDisabled = Color(hex: "DEDEDE")
    
-    static let secondaryButtonColorNormal = Color(hex: "00BDD3")
-    static let secondaryButtonColorPressed = Color(hex: "00BDD3")
+    static let secondaryButtonColorNormal = Color(hex: "009BBD")
+    static let secondaryButtonColorPressed = Color(hex: "009BBD")
     static let secondaryButtonColorDisabled = Color(hex: "000000").opacity(0.48)
     
+    // TextField
+    static let primaryTextFieldColorEnabled = Color(hex: "D0CFCF")
+    static let primaryTextFieldColorEnabledFocused = Color(hex: "00BDD3")
+    static let primaryTextFieldColorEnabledError = Color(hex: "CB3D40")
+    
+    static let primaryTextFieldTextColorEnabled = Color(hex: "000000").opacity(0.48)
     
     // Header Color
     static let primaryHeaderColor = Color(hex: "F4E041")
@@ -41,4 +47,11 @@ extension Color {
     
     // TabBar Color
     static let primaryTabBarBackgroundColor = Color(hex: "F8F8F8")
+    
+    // SelectionView Color
+    static let primarySelectionViewColorNormal = Color(hex: "D0CFCF")
+    static let primarySelectionViewColorSelected = Color(hex: "00BDD3")
+
+    // ERROR
+    static let errorColor = Color(hex: "B3261E")
 }

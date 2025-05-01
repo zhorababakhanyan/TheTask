@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct TabView: View {
-    @StateObject private var viewModel = TabViewModel()
+    @Binding var selectedTab: Tab
     
     var body: some View {
         ZStack {
             Color.primaryBackgroundColor
                 .ignoresSafeArea(.all)
             VStack(spacing: 0){
-                HeaderView(stage: viewModel.requestStage)
+                HeaderView(stage: selectedTab == .home ? .getRequest : .postRequest)
                 Group {
-                    switch viewModel.selectedTab {
-                    case 0: HomeView()
-                    default:
-                        SignUpView()
+                    switch selectedTab {
+                    case .home:
+                        HomeView()
+                    case .signUp:
+                        SignUpView(selectedTab: $selectedTab)
                     }
                 }
-                CustomTabBarView(selectedTab: $viewModel.selectedTab, tabItems: viewModel.tabItems)
+                CustomTabBarView(selectedTab: $selectedTab, tabItems: TabItem.allItems)
                     .frame(height: 56)
             }
         }
