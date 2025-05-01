@@ -34,61 +34,63 @@ struct SignUpView: View {
     @State private var isAnyRegistrationFindedErrorAlert = false
     
     var body: some View {
-        ZStack (alignment: .topLeading){
-            Color.primaryBackgroundColor
-                .ignoresSafeArea(.all)
-            VStack(alignment: .leading, spacing: 16) {
-                self.userInputView()
-                Text("Select your position")
-                    .customFont(.regular_400, size: 18, color: .primaryTextColor)
-                    .padding(.top, 8)
-                self.userPoitionSelectionListView()
-                self.userUploadPictureView()
-                self.userSignUpButtonView()
-            }
-            .onChange(of: viewModel.registrationResponse) { _ , response in
-                if let res = response {
-                    print("🎉 Registration Success: \(res)")
-                    self.isRegistrationSuccessFullScreenPresented = true
+        ScrollView {
+            ZStack (alignment: .topLeading){
+                Color.primaryBackgroundColor
+                    .ignoresSafeArea(.all)
+                VStack(alignment: .leading, spacing: 16) {
+                    self.userInputView()
+                    Text("Select your position")
+                        .customFont(.regular_400, size: 18, color: .primaryTextColor)
+                        .padding(.top, 8)
+                    self.userPoitionSelectionListView()
+                    self.userUploadPictureView()
+                    self.userSignUpButtonView()
                 }
-            }
-
-            .onChange(of: viewModel.registerUserErrorMessage) { _ , message in
-                if let msg = message {
-                    print("⚠️ Registration failed: \(msg)")
-                    if viewModel.emailAlreadyRedigtered {
-                        self.isRegistrationFaildFullScreenPresented = true
-                    } else {
-                        self.isAnyRegistrationFindedErrorAlert = true
+                .onChange(of: viewModel.registrationResponse) { _ , response in
+                    if let res = response {
+                        print("🎉 Registration Success: \(res)")
+                        self.isRegistrationSuccessFullScreenPresented = true
                     }
                 }
+                
+                .onChange(of: viewModel.registerUserErrorMessage) { _ , message in
+                    if let msg = message {
+                        print("⚠️ Registration failed: \(msg)")
+                        if viewModel.emailAlreadyRedigtered {
+                            self.isRegistrationFaildFullScreenPresented = true
+                        } else {
+                            self.isAnyRegistrationFindedErrorAlert = true
+                        }
+                    }
+                }
+                .fullScreenCover(isPresented: $isRegistrationSuccessFullScreenPresented) {
+                    SignUpSuccessView(selectedTab: $selectedTab)
+                }
+                .fullScreenCover(isPresented: $isRegistrationFaildFullScreenPresented) {
+                    SignUpFailedView()
+                }
+                .alert(isPresented: $isAnyRegistrationFindedErrorAlert) {
+                    Alert(
+                        title: Text("😕Oops! Something went wrong"),
+                        message: Text("Something went wrong. Please try signing up again.")
+                    )
+                }
+                .alert(isPresented: $showErrorUploadImageAlert) {
+                    Alert(
+                        title: Text("⚠️ Failed To Upload Image"),
+                        message: Text("\(String(describing: self.uploadingImageErrorMessage))")
+                    )
+                }
+                .onChange(of: nameField) { _, _ in clearError(for: .name) }
+                .onChange(of: emailField) { _, _ in clearError(for: .email) }
+                .onChange(of: phoneNumber) { _, _ in clearError(for: .phone) }
+                .padding(.top, 32)
+                .padding(.horizontal, 16)
             }
-            .fullScreenCover(isPresented: $isRegistrationSuccessFullScreenPresented) {
-                SignUpSuccessView(selectedTab: $selectedTab)
+            .task {
+                await viewModel.fetchPositions()
             }
-            .fullScreenCover(isPresented: $isRegistrationFaildFullScreenPresented) {
-                SignUpFailedView()
-            }
-            .alert(isPresented: $isAnyRegistrationFindedErrorAlert) {
-                Alert(
-                    title: Text("😕Oops! Something went wrong"),
-                    message: Text("Something went wrong. Please try signing up again.")
-                )
-            }
-            .alert(isPresented: $showErrorUploadImageAlert) {
-                Alert(
-                    title: Text("⚠️ Failed To Upload Image"),
-                    message: Text("\(String(describing: self.uploadingImageErrorMessage))")
-                )
-            }
-            .onChange(of: nameField) { _, _ in clearError(for: .name) }
-            .onChange(of: emailField) { _, _ in clearError(for: .email) }
-            .onChange(of: phoneNumber) { _, _ in clearError(for: .phone) }
-            .padding(.top, 32)
-            .padding(.horizontal, 16)
-        }
-        .task {
-            await viewModel.fetchPositions()
         }
     }
 }
@@ -200,7 +202,7 @@ extension SignUpView {
         }
         .scrollContentBackground(.hidden)
         .background(Color.clear)
-        .frame(maxHeight: 200)
+        .frame(height: CGFloat(viewModel.positions.count) * 50)
         .padding(.horizontal)
         .listStyle(.plain)
     }

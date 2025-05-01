@@ -16,14 +16,14 @@ struct TabView: View {
                 .ignoresSafeArea(.all)
             VStack(spacing: 0){
                 HeaderView(stage: selectedTab == .home ? .getRequest : .postRequest)
-                Group {
-                    switch selectedTab {
-                    case .home:
-                        HomeView()
-                    case .signUp:
-                        SignUpView(selectedTab: $selectedTab)
+                    Group {
+                        switch selectedTab {
+                        case .home:
+                            HomeView()
+                        case .signUp:
+                            SignUpView(selectedTab: $selectedTab)
+                        }
                     }
-                }
                 CustomTabBarView(selectedTab: $selectedTab, tabItems: TabItem.allItems)
                     .frame(height: 56)
             }
